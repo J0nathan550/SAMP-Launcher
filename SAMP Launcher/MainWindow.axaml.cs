@@ -2,7 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using SAMP_Launcher.Models;
 using System;
-using System.Collections.Generic;
 
 namespace SAMP_Launcher
 {

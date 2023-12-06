@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:model="using:SAMP_Launcher.Models"
+		xmlns:fa="http://schemas.fontawesome.io/icons/"
 		x:DataType="model:MainWindowModel"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
         x:Class="SAMP_Launcher.MainWindow"
@@ -31,7 +32,7 @@
 		</Panel>
 		<Grid Name="customTitleBar">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="41"/>
+				<ColumnDefinition Width="32"/>
 				<ColumnDefinition/>
 				<ColumnDefinition Width="150"/>
 			</Grid.ColumnDefinitions>
@@ -41,9 +42,11 @@
 		<Grid Grid.Row="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="18"/>
+				<RowDefinition Height="3"/>
+				<RowDefinition Height="32"/>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Menu>
+			<Menu Padding="3">
 				<MenuItem Cursor="Hand" FontSize="12">
 					<MenuItem.Header>
 						<TextBlock Text="File" TextTrimming="CharacterEllipsis"/>
@@ -151,6 +154,36 @@
 					</MenuItem>
 				</MenuItem>
 			</Menu>
+			<Separator Grid.Row="1"/>
+			<Grid Grid.Row="2" Margin="0,2,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<WrapPanel Margin="8,0,0,0">
+					<Button Margin="5,0,0,0" Content=">">
+					</Button>
+					<Rectangle Margin="5,0,0,0" Width="1" Height="25" Fill="White"/>
+					<Button Margin="5,0,0,0" Content="A"/>
+					<Button Margin="5,0,0,0" Content="R"/>
+					<Button Margin="5,0,0,0" Content="F"/>
+					<Rectangle Margin="5,0,0,0" Width="1" Height="25" Fill="White"/>
+					<Button Margin="5,0,0,0" Content="I"/>
+					<Button Margin="5,0,0,0" Content="P"/>
+					<Rectangle Margin="5,0,0,0" Width="1" Height="25" Fill="White"/>
+					<Button Margin="5,0,0,0" Content="S"/>
+					<Rectangle Margin="5,0,0,0" Width="1" Height="25" Fill="White"/>
+					<Button Margin="5,0,0,0" Content="H"/>
+					<Button Margin="5,0,0,0" Content="A"/>
+					<Rectangle Margin="5,0,0,0" Width="1" Height="25" Fill="White"/>
+				</WrapPanel>
+				<TextBox MinWidth="1" Grid.Column="1" Margin="5,0,0,0" Watermark="Enter nickname:" MaxLength="24"/>
+				<WrapPanel Grid.Column="2" Margin="0,0,10,0">
+					<Rectangle Margin="5,0,5,0" Width="1" Height="25" Fill="White"/>
+					<Button Content="SAMP"/>
+				</WrapPanel>
+			</Grid>
 		</Grid>
 	</Grid>
 </Window>
