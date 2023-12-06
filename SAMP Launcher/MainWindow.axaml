@@ -1,0 +1,156 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:SAMP_Launcher.Models"
+		x:DataType="model:MainWindowModel"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="SAMP_Launcher.MainWindow"
+		TransparencyLevelHint="AcrylicBlur"
+		ExtendClientAreaChromeHints="Default"
+		ExtendClientAreaToDecorationsHint="True"
+		WindowStartupLocation="CenterScreen"
+		Title="{Binding APP_TITLE}"
+		Icon="avares://SAMP Launcher/Assets/samp.ico"
+        Background="Transparent">
+	<Grid Name="mainWindowGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="32"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Panel Name="acrylBackground" Grid.RowSpan="2">
+			<ExperimentalAcrylicBorder IsHitTestVisible="False">
+				<ExperimentalAcrylicBorder.Material>
+					<ExperimentalAcrylicMaterial
+						BackgroundSource="Digger"
+						TintColor="Black"
+						TintOpacity="1"
+						MaterialOpacity="0" />
+				</ExperimentalAcrylicBorder.Material>
+			</ExperimentalAcrylicBorder>
+		</Panel>
+		<Grid Name="customTitleBar">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="41"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="150"/>
+			</Grid.ColumnDefinitions>
+			<Image Grid.Column="0" Margin="7" Source="avares://SAMP Launcher/Assets/samp.ico"/>
+			<TextBlock Text="{Binding APP_TITLE}" Grid.Column="1" FontSize="12" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+		</Grid>
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="18"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Menu>
+				<MenuItem Cursor="Hand" FontSize="12">
+					<MenuItem.Header>
+						<TextBlock Text="File" TextTrimming="CharacterEllipsis"/>
+					</MenuItem.Header>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Import Favorite List" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Export Favorite List" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<Separator/>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Exit" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Cursor="Hand" FontSize="12">
+					<MenuItem.Header>
+						<TextBlock Text="View" TextTrimming="CharacterEllipsis"/>
+					</MenuItem.Header>
+					<CheckBox Cursor="Hand" FontSize="12">
+						<CheckBox.Content>
+							<TextBlock Text="Filter / Server Info" TextTrimming="CharacterEllipsis"/>
+						</CheckBox.Content>
+					</CheckBox>
+					<Separator/>
+					<CheckBox Cursor="Hand" FontSize="12">
+						<CheckBox.Content>
+							<TextBlock Text="Status Bar" TextTrimming="CharacterEllipsis"/>
+						</CheckBox.Content>
+					</CheckBox>
+				</MenuItem>
+				<MenuItem Cursor="Hand" FontSize="12">
+					<MenuItem.Header>
+						<TextBlock Text="Servers" TextTrimming="CharacterEllipsis"/>
+					</MenuItem.Header>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Connect" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<Separator/>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Add Server" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Delete Server" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Refresh Server" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<Separator/>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Copy Server Info" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Server Properties" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Cursor="Hand" FontSize="12">
+					<MenuItem.Header>
+						<TextBlock Text="Tools" TextTrimming="CharacterEllipsis"/>
+					</MenuItem.Header>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Settings" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Cursor="Hand" FontSize="12">
+					<MenuItem.Header>
+						<TextBlock Text="Help" TextTrimming="CharacterEllipsis"/>
+					</MenuItem.Header>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="Help Topics" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<Separator/>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="SA-MP.com" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+					<Separator/>
+					<MenuItem Cursor="Hand" FontSize="12">
+						<MenuItem.Header>
+							<TextBlock Text="About" TextTrimming="CharacterEllipsis"/>
+						</MenuItem.Header>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+		</Grid>
+	</Grid>
+</Window>
