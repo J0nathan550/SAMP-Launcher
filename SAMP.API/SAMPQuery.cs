@@ -1,4 +1,4 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.Diagnostics;
 using System.Text.Json;
 
 namespace SAMP.API
@@ -25,7 +25,34 @@ namespace SAMP.API
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Trace.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Function that with given ipAddress queries to <see href="https://sam.markski.ar/api/GetServerPlayers?ip_addr="/>
+        /// it retrives the current players that is playing on that server. Keep also please in mind some servers that have
+        /// big amount of players it can simply return nothing as result (api of site will give the empty json)
+        /// It will not throw any exception, just if you want to check if you have no players you can simply create visual that will say
+        /// 'Couldn't not retrive player data' or whatever. 
+        /// </summary>
+        /// <param name="ipAddress">ipAddress of the server</param>
+        /// <returns>list of all players that are playing on server.</returns>
+        public static async Task<List<Players>?> GetPlayersAsync(string ipAddress)
+        {
+            using HttpClient client = new();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(Utils.LINK_GETSERVERPLAYERS + ipAddress);
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<List<Players>>(json);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
                 return null;
             }
         }

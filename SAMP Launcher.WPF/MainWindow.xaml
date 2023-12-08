@@ -14,7 +14,7 @@
         Background="Black"
         ui:TitleBar.IsIconVisible="True"
         Title="San Andreas Multiplayer 0.3.7-R3" 
-        Width="826" Height="593" MinHeight="39" MinWidth="168">
+        Width="1024" Height="720">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="18"/>
@@ -109,9 +109,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="1"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Name="gameServerDataGrid" AutoGenerateColumns="False" CanUserSortColumns="True" CanUserAddRows="False" Grid.Column="0" Grid.ColumnSpan="1" IsReadOnly="True">
+            <DataGrid Name="gameServerDataGrid" SelectionChanged="GameServerDataGrid_SelectionChanged" Cursor="Hand" AlternatingRowBackground="#141414" AutoGenerateColumns="False" CanUserSortColumns="True" CanUserAddRows="False" Grid.Column="0" Grid.ColumnSpan="1" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
@@ -136,7 +136,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Width="100" Binding="{Binding Name}">
+                    <DataGridTextColumn Width="200" Binding="{Binding Name}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -147,7 +147,7 @@
                             <TextBlock Text="Host Name" TextTrimming="CharacterEllipsis"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Binding="{Binding Ping}">
+                    <DataGridTextColumn Width="49" Binding="{Binding Ping}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -158,18 +158,31 @@
                             <TextBlock Text="Ping" TextTrimming="CharacterEllipsis"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Binding="{Binding CurrentPlayersSlashMaximumPlayers}">
+                    <DataGridTextColumn Width="106" Binding="{Binding PlayersOnline}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
                                 <Setter Property="Margin" Value="5,0,5,0"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Players" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="Current Players" TextTrimming="CharacterEllipsis"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Binding="{Binding GameMode}">
+                    <DataGridTextColumn Width="88" Binding="{Binding MaxPlayers}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0,5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="Max Players" TextTrimming="CharacterEllipsis"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="57" Binding="{Binding GameMode}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -180,7 +193,7 @@
                             <TextBlock Text="Mode" TextTrimming="CharacterEllipsis"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Language}">
+                    <DataGridTextColumn Width="77" Binding="{Binding Language}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -193,7 +206,7 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Name="loadingLabel" Text="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+            <TextBlock Name="loadingLabelAllServers" Text="Loading..." TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
@@ -201,7 +214,35 @@
                     <RowDefinition Height="1"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <DataGrid Grid.Row="0" Grid.RowSpan="1"/>
+                <TextBlock Name="loadingLabelPlayers" Visibility="Hidden" Text="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" TextTrimming="CharacterEllipsis"/>
+                <DataGrid Name="playersTabDataGrid" Grid.Row="0" Grid.RowSpan="1" IsReadOnly="True" Cursor="Hand" AlternatingRowBackground="#141414" AutoGenerateColumns="False" CanUserSortColumns="True" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="100" Binding="{Binding Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="Margin" Value="5,0,5,0"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Player" TextTrimming="CharacterEllipsis"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="55" Binding="{Binding Score}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Margin" Value="5,0,5,0"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Score" TextTrimming="CharacterEllipsis"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                 <DataGrid Grid.Row="2" Grid.RowSpan="1"/>
             </Grid>

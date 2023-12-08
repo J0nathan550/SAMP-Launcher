@@ -1,7 +1,4 @@
-﻿using System.Net.NetworkInformation;
-using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
 
 namespace SAMP.API
 {
@@ -45,17 +42,6 @@ namespace SAMP.API
         /// </summary>
         [JsonPropertyName("maxPlayers")]
         public int MaxPlayers { get; set; }
-
-        /// <summary>
-        /// Returns the PlayerAmount / MaxPlayers, this is for the MVVM pattern to represent as data or as you want.
-        /// </summary>
-        public string CurrentPlayersSlashMaximumPlayers
-        {
-            get
-            {
-                return $"{PlayersOnline} / {MaxPlayers}";
-            }
-        }
 
         /// <summary>
         /// Is server using OpenMP server

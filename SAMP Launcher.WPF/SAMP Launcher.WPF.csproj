@@ -26,6 +26,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="samp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="samp.ico" />
   </ItemGroup>
 
@@ -36,6 +40,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SAMP.API\SAMP.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="samp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </SplashScreen>
   </ItemGroup>
 
 </Project>
